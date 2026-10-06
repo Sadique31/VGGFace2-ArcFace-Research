@@ -1,0 +1,11 @@
+numpy
+pandas
+opencv-python
+Pillow
+matplotlib
+scikit-learn
+tensorflow==2.21.0
+deepface==0.0.101
+tf-keras==2.21.0
+jupyter
+ipykernel

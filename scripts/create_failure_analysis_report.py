@@ -1,0 +1,311 @@
+from pathlib import Path
+
+OUTPUT = Path("results/hard_pair_analysis/failure_analysis_report.txt")
+
+report = """
+MISSING PERSON FINDER
+FACE RECOGNITION BASELINE FAILURE ANALYSIS
+============================================
+
+1. PURPOSE
+-----------
+This analysis investigates why difficult face-recognition pairs are challenging
+for the baseline DeepFace ArcFace pipeline.
+
+The analysis compares:
+- Hard genuine pairs: same identity but unusually low similarity.
+- Hard impostor pairs: different identities but unusually high similarity.
+- Random genuine pairs.
+- Random impostor pairs.
+
+The hard pairs were selected from the baseline similarity evaluation.
+
+Important:
+This is a baseline pairwise analysis on the selected VGGFace2 subset.
+It is not a final real-world accuracy estimate.
+
+
+2. BASELINE PERFORMANCE
+-----------------------
+Evaluation pairs: 20,000
+Genuine pairs:     10,000
+Impostor pairs:    10,000
+
+ROC-AUC:            0.9502
+EER:                11.11%
+EER threshold:      0.1923
+
+Best F1 threshold:  0.2004
+Precision:          0.8992
+Recall / TAR:       0.8797
+F1 score:           0.8893
+FAR:                0.0986
+
+Confusion matrix at the best F1 threshold:
+TN = 9014
+FP = 986
+FN = 1203
+TP = 8797
+
+
+3. HARD-PAIR VISUAL ANALYSIS
+----------------------------
+Hard genuine pairs showed the following recurring visual characteristics:
+
+- Pose variation
+- Illumination variation
+- Blur / image-quality variation
+- Facial expression changes
+- Occlusion from glasses, hats, hair, etc.
+- Alignment and crop differences
+- Different face size / resolution
+- Hairstyle, facial hair, and makeup changes
+- Extreme viewpoint differences
+
+Hard impostor pairs showed:
+
+- Similar facial structure
+- Similar pose
+- Similar lighting
+- Similar expression
+- Similar hairstyle or accessories
+- Similar profile orientation
+- Overall visual similarity between different identities
+
+
+4. IMAGE QUALITY ANALYSIS
+-------------------------
+The quantitative quality analysis covered:
+
+- Blur / sharpness
+- Brightness
+- Contrast
+
+Important finding:
+Generic image sharpness alone did not explain the difficult pairs.
+
+Hard genuine pairs did not simply correspond to low-quality images,
+and hard impostors were not necessarily blurrier than normal impostors.
+
+
+5. POSE STATISTICAL ANALYSIS
+----------------------------
+Pose was measured using a normalized landmark-based pose indicator.
+
+This is a relative landmark-based measure and should not be interpreted
+as a calibrated yaw angle in degrees.
+
+HARD GENUINE VS RANDOM GENUINE
+
+Hard genuine:
+N = 100
+Mean = 0.2092
+Median = 0.1361
+
+Random genuine:
+N = 1000
+Mean = 0.1983
+Median = 0.1465
+
+Mann-Whitney U = 49799.00
+p-value = 0.947224
+Cohen's d = 0.0566
+
+Conclusion:
+No statistically significant difference was observed.
+The effect size is negligible.
+
+Therefore, pose does not appear to be the primary explanation
+for hard genuine failures in this analysis.
+
+
+HARD IMPOSTOR VS RANDOM IMPOSTOR
+
+Hard impostor:
+N = 100
+Mean = 0.4256
+Median = 0.3029
+
+Random impostor:
+N = 1000
+Mean = 0.1949
+Median = 0.1514
+
+Mann-Whitney U = 71297.00
+p-value = 2.05342e-12
+Cohen's d = 1.1728
+
+Conclusion:
+The difference is highly statistically significant.
+The effect size is large.
+
+Hard impostor pairs therefore contain substantially greater
+pose variation than random impostor pairs.
+
+This is the strongest quantitative signal identified so far.
+
+
+6. BRIGHTNESS STATISTICAL ANALYSIS
+----------------------------------
+HARD GENUINE VS RANDOM GENUINE
+
+Hard genuine:
+N = 100
+Mean = 23.6792
+Median = 21.6459
+
+Random genuine:
+N = 1000
+Mean = 19.5538
+Median = 16.6772
+
+Mann-Whitney U = 56793.00
+p-value = 0.024931
+Cohen's d = 0.2720
+
+Conclusion:
+Statistically significant, but the effect size is small.
+
+
+HARD IMPOSTOR VS RANDOM IMPOSTOR
+
+Hard impostor:
+N = 100
+Mean = 18.5042
+Median = 14.8442
+
+Random impostor:
+N = 1000
+Mean = 23.0273
+Median = 19.5820
+
+Mann-Whitney U = 42305.00
+p-value = 0.0110772
+Cohen's d = -0.2591
+
+Conclusion:
+Statistically significant, but the effect size is small.
+
+The direction of the effect differs between genuine and impostor groups.
+
+Therefore, brightness mismatch alone is unlikely to explain
+the majority of difficult recognition cases.
+
+
+7. CONTRAST STATISTICAL ANALYSIS
+--------------------------------
+HARD GENUINE VS RANDOM GENUINE
+
+Hard genuine:
+N = 100
+Mean = 15.3455
+Median = 14.5182
+
+Random genuine:
+N = 1000
+Mean = 13.0635
+Median = 10.8016
+
+Mann-Whitney U = 56323.00
+p-value = 0.0368606
+Cohen's d = 0.2242
+
+Conclusion:
+Statistically significant, but the effect size is small.
+
+
+HARD IMPOSTOR VS RANDOM IMPOSTOR
+
+Hard impostor:
+N = 100
+Mean = 13.6939
+Median = 11.1516
+
+Random impostor:
+N = 1000
+Mean = 15.5258
+Median = 13.3851
+
+Mann-Whitney U = 45335.00
+p-value = 0.123576
+Cohen's d = -0.1576
+
+Conclusion:
+Not statistically significant.
+
+
+8. OVERALL EVIDENCE
+-------------------
+Factor                  Hard Genuine       Hard Impostor
+---------------------------------------------------------
+Pose                    Negligible         STRONG
+Brightness              Small effect       Small effect
+Contrast                Small effect       Not significant
+Blur / sharpness        No clear evidence  No clear evidence
+Visual similarity       Observed visually  Strongly observed
+
+
+9. MAIN RESEARCH FINDING
+------------------------
+The baseline analysis suggests that difficult recognition cases are
+not explained by a single generic image-quality problem.
+
+The strongest quantitative evidence is associated with pose variation
+in hard impostor pairs.
+
+Hard genuine failures appear to involve multiple factors including
+appearance variation, alignment/crop differences, expression,
+occlusion, illumination, and other intra-identity changes.
+
+Hard impostor failures additionally show strong evidence of
+extreme viewpoint variation and visual similarity between
+different identities.
+
+
+10. IMPLICATION FOR THE IMPROVEMENT EXPERIMENT
+-----------------------------------------------
+The evidence supports investigating pose-aware preprocessing or
+more robust face alignment as a promising improvement direction.
+
+However, the analysis does not establish that pose normalization
+will solve all recognition failures.
+
+The improvement must therefore be evaluated experimentally using
+the same baseline evaluation protocol and compared quantitatively.
+
+The key comparison should include:
+
+- ROC-AUC
+- EER
+- TAR / Recall
+- FAR
+- Precision
+- F1
+- Similarity distributions
+- Hard-pair behavior
+
+The final research claim should be based on measured before-vs-after
+performance rather than assuming that the proposed preprocessing
+will improve recognition.
+
+
+11. METHODOLOGICAL LIMITATION
+-----------------------------
+The current evaluation uses a selected VGGFace2 subset and a
+20,000-pair baseline evaluation.
+
+The current results should therefore be described as baseline
+pairwise evaluation results.
+
+A separate identity-disjoint generalization evaluation should
+eventually be included before making strong claims about
+generalization to unseen identities or real-world missing-person
+search scenarios.
+"""
+
+OUTPUT.write_text(report.strip() + "\n", encoding="utf-8")
+
+print("========================================")
+print("Failure analysis report created")
+print("========================================")
+print(f"Saved: {OUTPUT}")

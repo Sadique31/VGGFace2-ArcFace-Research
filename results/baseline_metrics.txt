@@ -1,0 +1,17 @@
+DEEPFACE ARCFACE BASELINE EVALUATION
+==================================================
+Evaluation pairs: 20000
+ROC-AUC: 0.950220
+EER: 0.111150
+EER percentage: 11.11%
+EER threshold: 0.192285
+Best F1 threshold: 0.200380
+Precision: 0.899213
+Recall: 0.879700
+F1-score: 0.889349
+TAR / TPR: 0.879700
+FAR: 0.098600
+True Negatives: 9014
+False Positives: 986
+False Negatives: 1203
+True Positives: 8797

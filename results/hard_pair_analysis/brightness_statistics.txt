@@ -1,0 +1,27 @@
+Brightness Statistical Analysis
+==================================================
+
+Hard Genuine vs Random Genuine
+------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 23.6792
+Mean 2 = 19.5538
+Median 1 = 21.6459
+Median 2 = 16.6772
+Mann-Whitney U = 56793.00
+p-value = 0.024931
+Cohen's d = 0.2720
+
+Hard Impostor vs Random Impostor
+--------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 18.5042
+Mean 2 = 23.0273
+Median 1 = 14.8442
+Median 2 = 19.5820
+Mann-Whitney U = 42305.00
+p-value = 0.0110772
+Cohen's d = -0.2591
+

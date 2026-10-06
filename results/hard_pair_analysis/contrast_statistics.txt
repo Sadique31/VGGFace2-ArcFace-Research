@@ -1,0 +1,27 @@
+Contrast Statistical Analysis
+==================================================
+
+Hard Genuine vs Random Genuine
+------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 15.3455
+Mean 2 = 13.0635
+Median 1 = 14.5182
+Median 2 = 10.8016
+Mann-Whitney U = 56323.00
+p-value = 0.0368606
+Cohen's d = 0.2242
+
+Hard Impostor vs Random Impostor
+--------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 13.6939
+Mean 2 = 15.5258
+Median 1 = 11.1516
+Median 2 = 13.3851
+Mann-Whitney U = 45335.00
+p-value = 0.123576
+Cohen's d = -0.1576
+

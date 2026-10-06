@@ -1,0 +1,39 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large datasets
+data/raw/
+data/selected/
+data/aligned/
+
+# Large model / embedding files
+models/*.h5
+models/*.keras
+models/*.pt
+models/*.pth
+models/*.onnx
+results/arcface_embeddings/
+results/*.npy
+
+# Generated large files
+*.tar
+*.tar.gz
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local environment
+.env
+
+# Large VGGFace2 metadata
+metadata/bb_landmark/
+metadata/train_landmarks.csv
+metadata/train_bounding_boxes.csv

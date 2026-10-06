@@ -1,0 +1,29 @@
+POSE DIFFERENCE STATISTICAL ANALYSIS
+==================================================
+
+Hard Genuine vs Random Genuine
+------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 0.3058
+Mean 2 = 0.2982
+Median 1 = 0.1825
+Median 2 = 0.2018
+Mann-Whitney U = 48384.00
+p-value = 0.593798
+Cohen's d = 0.0207
+Interpretation = Not statistically significant (p >= 0.05)
+
+Hard Impostor vs Random Impostor
+--------------------------------
+N1 = 100
+N2 = 1000
+Mean 1 = 0.6693
+Mean 2 = 0.2918
+Median 1 = 0.3607
+Median 2 = 0.2056
+Mann-Whitney U = 66426.00
+p-value = 5.87055e-08
+Cohen's d = 0.9834
+Interpretation = Highly statistically significant (p < 0.001)
+

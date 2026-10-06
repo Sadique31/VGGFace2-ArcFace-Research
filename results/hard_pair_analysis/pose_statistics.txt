@@ -1,0 +1,21 @@
+POSE STATISTICAL ANALYSIS
+============================================================
+
+Comparison: Genuine: hard vs random
+------------------------------------------------------------
+hard_genuine: N=100, Mean=0.2092, Median=0.1361
+random_genuine: N=1000, Mean=0.1983, Median=0.1465
+Mann-Whitney U: 49799.00
+p-value: 0.947224
+Cohen's d: 0.0566
+Interpretation: Not statistically significant (p >= 0.05)
+
+Comparison: Impostor: hard vs random
+------------------------------------------------------------
+hard_impostor: N=100, Mean=0.4256, Median=0.3029
+random_impostor: N=1000, Mean=0.1949, Median=0.1514
+Mann-Whitney U: 71297.00
+p-value: 2.05342e-12
+Cohen's d: 1.1728
+Interpretation: Highly statistically significant (p < 0.001)
+
